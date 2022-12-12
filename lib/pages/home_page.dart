@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:music_app/assets/theme/colors.dart';
+import 'package:music_app/assets/font/font.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -14,8 +16,7 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(AppLocalizations.of(context)!.homepage,
-                style: const TextStyle(
-                    color: gold, fontWeight: FontWeight.bold, fontSize: 20)),
+                style: paragraphTextStyle),
           ],
         ),
       ),
