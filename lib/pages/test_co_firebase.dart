@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:music_app/assets/theme/colors.dart';
-import 'package:music_app/assets/font/font.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,7 +9,7 @@ class TestCoFirebase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: mainColorDark,
       body: UserInformation(),
     );
@@ -19,6 +17,8 @@ class TestCoFirebase extends StatelessWidget {
 }
 
 class UserInformation extends StatefulWidget {
+  const UserInformation({super.key});
+
   @override
   _UserInformationState createState() => _UserInformationState();
 }
