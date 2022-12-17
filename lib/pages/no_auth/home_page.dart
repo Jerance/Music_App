@@ -4,8 +4,8 @@ import 'package:music_app/utils/translate.dart';
 import 'package:music_app/assets/font/font.dart';
 import 'package:music_app/assets/theme/colors.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class HomeNoAuthPage extends StatelessWidget {
+  const HomeNoAuthPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
