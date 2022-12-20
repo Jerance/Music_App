@@ -16,14 +16,12 @@ Future<void> main() async {
   await Firebase.initializeApp();
   auth.authStateChanges().listen((User? user) {
     if (user == null) {
-      print('Utilisateur non connecté');
       runApp(const MaterialApp(
           debugShowCheckedModeBanner: false,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: HomeNoAuthPage()));
+          home: HomeWithNoAuthPage()));
     } else {
-      print('Utilisateur connecté: ' + user.email!);
       runApp(const MaterialApp(
           debugShowCheckedModeBanner: false,
           localizationsDelegates: AppLocalizations.localizationsDelegates,

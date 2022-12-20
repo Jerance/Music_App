@@ -15,8 +15,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
-  cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
+  carousel_slider: ^4.2.1
+  flutter_svg: ^1.1.6
+  smooth_page_indicator: ^1.0.0+2
+
 
   firebase_core: ^2.4.0
   cloud_firestore: ^4.2.0
@@ -32,3 +35,15 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+
+  assets:
+    - lib/assets/img/logoMusicApp.png
+    - lib/assets/img/illustrations/undraw_audio_player_re_cl20.svg
+    - lib/assets/img/illustrations/undraw_listening_re_c2w0.svg
+    - lib/assets/img/illustrations/undraw_media_player_re_rdd2.svg
+    - lib/assets/img/illustrations/undraw_meditating_re_aiqa.svg
+    - lib/assets/img/illustrations/undraw_social_interaction_re_dyjh.svg
+    - lib/assets/img/icons/forward-solid.svg
+    - lib/assets/img/icons/backward-solid.svg
+    - lib/assets/img/icons/pause-solid.svg
+    - lib/assets/img/icons/play-solid.svg

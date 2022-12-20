@@ -1,5 +1,6 @@
 {
-    "homepage": "Bonjour le monde",
-    "test": "tester",
-    "title": "test title"
+    "nomApplication" : "MusicApp",
+    "inscription": "Inscription",
+    "connection": "Connexion",
+    "back" : "Retour"
 }

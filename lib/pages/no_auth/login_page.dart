@@ -4,8 +4,8 @@ import 'package:music_app/utils/translate.dart';
 import 'package:music_app/assets/font/font.dart';
 import 'package:music_app/assets/theme/colors.dart';
 
-class TrendPage extends StatelessWidget {
-  const TrendPage({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,12 @@ class TrendPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(t(context)!.nomApplication, style: paragraphTextStyle),
+            Text(t(context)!.connection, style: paragraphTextStyle),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(t(context)!.back, style: paragraphTextStyle)),
           ],
         ),
       ),

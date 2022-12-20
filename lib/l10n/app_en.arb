@@ -1,5 +1,6 @@
 {
-    "homepage": "HomePage",
-    "test": "test",
-    "title": "test title"
+    "nomApplication" : "MusicApp",
+    "inscription": "SignUp",
+    "connection": "Login",
+    "back" : "Back"
 }

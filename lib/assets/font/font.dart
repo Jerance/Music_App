@@ -5,5 +5,14 @@ import '../theme/colors.dart';
 
 TextStyle paragraphTextStyle = GoogleFonts.poppins(color: gold, fontSize: 15);
 
+TextStyle p1 = GoogleFonts.poppins(
+    color: mainColorDark, fontSize: 15, fontWeight: FontWeight.bold);
+
+TextStyle p1gold =
+    GoogleFonts.poppins(color: gold, fontSize: 15, fontWeight: FontWeight.bold);
+
 TextStyle mainTitle = GoogleFonts.fredokaOne(
-    color: gold, fontWeight: FontWeight.bold, fontSize: 30);
+    color: mainColorLight, fontWeight: FontWeight.bold, fontSize: 30);
+
+TextStyle textSlides =
+    GoogleFonts.poppins(color: gold, fontSize: 12, fontWeight: FontWeight.bold);
