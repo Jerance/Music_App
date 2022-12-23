@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/assets/theme/styles.dart';
+import 'package:music_app/services/auth.dart';
 import 'package:music_app/utils/translate.dart';
 
 import 'package:music_app/assets/font/font.dart';
@@ -13,6 +14,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final emailField = TextEditingController();
+  final passwordField = TextEditingController();
   bool passwordVisible = true;
 
   @override
@@ -54,10 +57,11 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             width: 355,
             height: 60,
-            child: const Center(
+            child: Center(
               child: TextField(
-                style: TextStyle(color: lightGray, fontSize: 14),
-                decoration: InputDecoration(
+                controller: emailField,
+                style: const TextStyle(color: lightGray, fontSize: 14),
+                decoration: const InputDecoration(
                   border: UnderlineInputBorder(
                     borderSide: BorderSide(
                       width: 0,
@@ -92,6 +96,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 60,
             child: Center(
               child: TextField(
+                controller: passwordField,
                 obscureText: passwordVisible,
                 enableSuggestions: false,
                 autocorrect: false,
@@ -133,10 +138,8 @@ class _LoginPageState extends State<LoginPage> {
           ),
           TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
+                loginFirebase(
+                    emailField.text.trim(), passwordField.text.trim());
               },
               style: btnSignUp,
               child: Text(t(context)!.connection, style: p1)),

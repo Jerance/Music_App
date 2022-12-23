@@ -21,12 +21,14 @@ Future<void> main() async {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: HomeWithNoAuthPage()));
+      print("utilisateur non connecté ");
     } else {
       runApp(const MaterialApp(
           debugShowCheckedModeBanner: false,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: TrendPage()));
+      print("utilisateur connecté ");
     }
   });
 }
