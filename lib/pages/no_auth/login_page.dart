@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mainColorDark,
-        toolbarHeight: 100,
+        toolbarHeight: 190,
         shadowColor: Colors.transparent,
         title: Center(
           child: Row(
@@ -46,9 +46,6 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(children: [
-          const SizedBox(
-            height: 50,
-          ),
           Align(
             alignment: Alignment.centerLeft,
             child: Container(
