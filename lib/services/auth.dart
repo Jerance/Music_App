@@ -11,3 +11,7 @@ void loginFirebase(String email, String password) {
     print(e.toString());
   }
 }
+
+void logoutFirebase() {
+  auth.signOut();
+}

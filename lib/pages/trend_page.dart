@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/assets/theme/styles.dart';
+import 'package:music_app/services/auth.dart';
 import 'package:music_app/utils/translate.dart';
 
 import 'package:music_app/assets/font/font.dart';
@@ -16,6 +18,11 @@ class TrendPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(t(context)!.nomApplication, style: paragraphTextStyle),
+            TextButton(
+              style: btnSignUp,
+              onPressed: logoutFirebase,
+              child: Text("Deconnexion", style: p1),
+            ),
           ],
         ),
       ),
