@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/assets/theme/colors.dart';
 
+AppBar customAppBar = AppBar();
+
 ButtonStyle btnSignUp = ButtonStyle(
     backgroundColor: MaterialStateProperty.all(gold),
     fixedSize: MaterialStateProperty.all(const Size(250, 45)),

@@ -2,5 +2,7 @@
     "nomApplication" : "MusicApp",
     "inscription": "SignUp",
     "connection": "Login",
-    "back" : "Back"
+    "back" : "Back",
+    "email_label" : "Mail adress"
+
 }

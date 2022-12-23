@@ -18,3 +18,7 @@ const Color goldDark = Color(0xFFbf9b30);
 
 const Color goldPaperLight = Color(0xFFcfaa3f);
 const Color goldPaperDark = Color(0xFFa67c00);
+
+const Color inputBg = Color(0xFF40444B);
+
+const Color lightGray = Color(0xFFDCDDDE);

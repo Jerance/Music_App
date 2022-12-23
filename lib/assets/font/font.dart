@@ -16,3 +16,8 @@ TextStyle mainTitle = GoogleFonts.fredokaOne(
 
 TextStyle textSlides =
     GoogleFonts.poppins(color: gold, fontSize: 12, fontWeight: FontWeight.bold);
+
+TextStyle inputLabel = GoogleFonts.poppins(
+    color: goldLight, fontSize: 18, fontWeight: FontWeight.bold);
+
+TextStyle outputLabel = GoogleFonts.poppins(color: lightGray, fontSize: 14);
