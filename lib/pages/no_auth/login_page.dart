@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/assets/theme/styles.dart';
+import 'package:music_app/pages/trend_page.dart';
 import 'package:music_app/services/auth.dart';
 import 'package:music_app/utils/translate.dart';
 
@@ -140,6 +141,8 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () {
                 loginFirebase(
                     emailField.text.trim(), passwordField.text.trim());
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const TrendPage()));
               },
               style: btnSignUp,
               child: Text(t(context)!.connection, style: p1)),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/assets/theme/styles.dart';
+import 'package:music_app/pages/no_auth/home_page.dart';
 import 'package:music_app/services/auth.dart';
 import 'package:music_app/utils/translate.dart';
 
@@ -20,7 +21,13 @@ class TrendPage extends StatelessWidget {
             Text(t(context)!.nomApplication, style: paragraphTextStyle),
             TextButton(
               style: btnSignUp,
-              onPressed: logoutFirebase,
+              onPressed: () {
+                logoutFirebase();
+                Navigator.pop(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomeWithNoAuthPage()));
+              },
               child: Text("Deconnexion", style: p1),
             ),
           ],
