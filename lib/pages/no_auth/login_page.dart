@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/assets/theme/styles.dart';
-import 'package:music_app/pages/trend_page.dart';
 import 'package:music_app/services/auth.dart';
 import 'package:music_app/utils/translate.dart';
 
@@ -58,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Center(
               child: TextField(
                 controller: emailField,
-                style: const TextStyle(color: lightGray, fontSize: 14),
+                style: const TextStyle(color: lightGray, fontSize: 16),
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(
                     borderSide: BorderSide(
@@ -75,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                   filled: true,
                   fillColor: inputBg,
                   hintText: "exemple@gmail.com",
-                  hintStyle: TextStyle(color: lightGray, fontSize: 14),
+                  hintStyle: TextStyle(color: lightGray, fontSize: 16),
                 ),
               ),
             ),
@@ -87,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
             alignment: Alignment.centerLeft,
             child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Text(t(context)!.email_label, style: inputLabel)),
+                child: Text("Mot de passe", style: inputLabel)),
           ),
           Container(
             width: 355,
@@ -98,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: passwordVisible,
                 enableSuggestions: false,
                 autocorrect: false,
-                style: const TextStyle(color: lightGray, fontSize: 14),
+                style: const TextStyle(color: lightGray, fontSize: 16),
                 decoration: InputDecoration(
                     border: const UnderlineInputBorder(
                       borderSide: BorderSide(
@@ -115,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                     filled: true,
                     fillColor: inputBg,
                     hintText: "azerty",
-                    hintStyle: const TextStyle(color: lightGray, fontSize: 14),
+                    hintStyle: const TextStyle(color: lightGray, fontSize: 16),
                     suffixIcon: InkWell(
                       onTap: _toggleIconEye,
                       child: passwordVisible == true
@@ -137,9 +136,7 @@ class _LoginPageState extends State<LoginPage> {
           TextButton(
               onPressed: () {
                 loginFirebase(
-                    emailField.text.trim(), passwordField.text.trim());
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const TrendPage()));
+                    emailField.text.trim(), passwordField.text.trim(), context);
               },
               style: btnSignUp,
               child: Text(t(context)!.connection, style: p1)),

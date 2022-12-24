@@ -1,3 +1,4 @@
+// Flutter material.dart & l10n
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -14,21 +15,41 @@ FirebaseAuth auth = FirebaseAuth.instance;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   auth.authStateChanges().listen((User? user) {
     if (user == null) {
-      runApp(const MaterialApp(
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: HomeWithNoAuthPage()));
-      print("utilisateur non connecté ");
+      runApp(Routes(initialPage: const HomeWithNoAuthPage()));
+      print("Run App --> Utilisateur non connecté");
     } else {
-      runApp(const MaterialApp(
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: TrendPage()));
-      print("utilisateur connecté ");
+      runApp(Routes(initialPage: const TrendPage()));
+      print("Run App --> Utilisateur connecté");
     }
   });
+}
+
+class Routes extends StatelessWidget {
+  Routes({
+    Key? key,
+    required this.initialPage,
+  }) : super(key: key);
+
+  final Widget initialPage;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Navigator(
+        pages: [
+          MaterialPage(
+            key: const ValueKey('InitialPage'),
+            child: initialPage,
+          ),
+        ],
+        onPopPage: (route, result) => route.didPop(result),
+      ),
+    );
+  }
 }
