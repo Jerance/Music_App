@@ -11,16 +11,16 @@ void loginFirebase(String email, String password, context) {
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
       // Connexion réussie
-      print(value.toString());
+      debugPrint(value.toString());
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const TrendPage()));
     }).catchError((error) {
       // Connexion échouée
-      print(error.toString());
+      debugPrint(error.toString());
       // Affichez un message d'erreur ici
     });
   } catch (e) {
-    print(e.toString());
+    debugPrint(e.toString());
   }
 }
 

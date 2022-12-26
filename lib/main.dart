@@ -18,17 +18,17 @@ Future<void> main() async {
 
   auth.authStateChanges().listen((User? user) {
     if (user == null) {
-      runApp(Routes(initialPage: const HomeWithNoAuthPage()));
-      print("Run App --> Utilisateur non connecté");
+      runApp(const Routes(initialPage: HomeWithNoAuthPage()));
+      debugPrint("Run App --> Utilisateur non connecté");
     } else {
-      runApp(Routes(initialPage: const TrendPage()));
-      print("Run App --> Utilisateur connecté");
+      runApp(const Routes(initialPage: TrendPage()));
+      debugPrint("Run App --> Utilisateur connecté");
     }
   });
 }
 
 class Routes extends StatelessWidget {
-  Routes({
+  const Routes({
     Key? key,
     required this.initialPage,
   }) : super(key: key);
