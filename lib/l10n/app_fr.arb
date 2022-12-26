@@ -1,7 +1,9 @@
 {
     "nomApplication" : "MusicApp",
-    "inscription": "Inscription",
-    "connection": "Connexion",
+    "inscription" : "Inscription",
+    "register" : "S'enregistrer",
+    "connection" : "Connexion",
+    "next" : "Suivant",
     "back" : "Retour",
     "email_label" : "Adresse mail"
 }
