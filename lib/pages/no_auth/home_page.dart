@@ -40,7 +40,7 @@ class _HomeWithNoAuthPageState extends State<HomeWithNoAuthPage> {
         body: Column(
           children: [
             const SizedBox(
-              height: 100,
+              height: 80,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

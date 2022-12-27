@@ -23,7 +23,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mainColorDark,
-        toolbarHeight: 190,
+        toolbarHeight: 150,
         shadowColor: Colors.transparent,
         title: Center(
           child: Row(
