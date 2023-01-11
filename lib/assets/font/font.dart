@@ -21,3 +21,5 @@ TextStyle inputLabel = GoogleFonts.poppins(
     color: goldLight, fontSize: 18, fontWeight: FontWeight.bold);
 
 TextStyle outputLabel = GoogleFonts.poppins(color: lightGray, fontSize: 14);
+
+TextStyle verifErrors = GoogleFonts.poppins(color: darkRed, fontSize: 12);
