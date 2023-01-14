@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:music_app/assets/theme/styles.dart';
+import 'package:music_app/services/auth.dart';
 import 'package:music_app/utils/translate.dart';
 
 import 'dart:io';
@@ -9,7 +11,11 @@ import 'package:music_app/assets/font/font.dart';
 import 'package:music_app/assets/theme/colors.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+FirebaseStorage storage = FirebaseStorage.instance;
+FirebaseAuth auth = FirebaseAuth.instance;
 
 class SignUpStep2Screen extends StatefulWidget {
   SignUpStep2Screen({super.key, required this.email, required this.password});
@@ -22,9 +28,31 @@ class SignUpStep2Screen extends StatefulWidget {
 }
 
 class _SignUpStep2PageState extends State<SignUpStep2Screen> {
-  File? _image;
+  String _email = "";
+  String _password = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _email = widget.email;
+    _password = widget.password;
+
+    dateinput.text = ""; //set the initial value of text field
+    super.initState();
+  }
+
+  var image;
   final picker = ImagePicker();
 
+  Future uploadFile() async {
+    Reference storageRef = storage.ref('Users').child('test.png');
+    UploadTask uploadTask = storageRef.putFile(image);
+    await uploadTask.whenComplete(() => print("File uploaded successfully"));
+  }
+
+  final dateinput = TextEditingController();
+
+  bool checkedValue = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +86,9 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
           child: Column(
             children: [
               Container(
-                child: _image == null
+                child: image == null
                     ? const Text('No image selected')
-                    : Image.file(_image!),
+                    : Image.file(image!),
               ),
               const SizedBox(
                 height: 20,
@@ -74,6 +102,9 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
                   )),
             ],
           ),
+        ),
+        const SizedBox(
+          height: 10,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -190,15 +221,126 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 20,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 35.0),
+                child: Text('Date de naissance', style: inputLabel)),
+          ),
+          Container(
+            width: 360,
+            height: 60,
+            child: Center(
+                child: TextField(
+              style: const TextStyle(color: lightGray, fontSize: 16),
+              textAlignVertical: TextAlignVertical
+                  .center, // text qui va centrer au niveau du prefix Icon
+              controller: dateinput, //editing controller of this TextField
+              decoration: const InputDecoration(
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(10),
+                    topLeft: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                ),
+                filled: true,
+                fillColor: inputBg,
+                hintText: "date de naissance",
+                hintStyle: TextStyle(color: lightGray, fontSize: 16),
+                prefixIcon: Icon(
+                  Icons.calendar_month,
+                  color: gold,
+                ), //icon of text field
+              ),
+              readOnly:
+                  true, //set it true, so that user will not able to edit text
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(
+                      2000), //DateTime.now() - not to allow to choose before today.
+                  lastDate: DateTime(2101),
+                  builder: (context, child) {
+                    return Theme(
+                      data: Theme.of(context).copyWith(
+                        colorScheme: const ColorScheme.light(
+                          primary: goldLight, // <-- SEE HERE
+                          onPrimary: mainColorDark, // <-- SEE HERE
+                          onSurface: mainColorDark, // <-- SEE HERE
+                        ),
+                        textButtonTheme: TextButtonThemeData(
+                          style: TextButton.styleFrom(
+                            primary: Colors.red, // button text color
+                          ),
+                        ),
+                      ),
+                      child: child!,
+                    );
+                  },
+                );
+                if (pickedDate != null) {
+                  print(
+                      pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                  String formattedDate =
+                      DateFormat('dd-MM-yyyy').format(pickedDate);
+                  print(
+                      formattedDate); //formatted date output using intl package =>  2021-03-16
+                  //you can implement different kind of Date Format here according to your requirement
+
+                  setState(() {
+                    dateinput.text =
+                        formattedDate; //set output date to TextField value.
+                  });
+                } else {
+                  print("Date is not selected");
+                }
+              },
+            )),
           ),
         ]),
         const SizedBox(
           height: 30,
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Row(
+            children: [
+              Checkbox(
+                fillColor: MaterialStateProperty.all(gold),
+                value: checkedValue,
+                onChanged: (newValue) {
+                  setState(() {
+                    checkedValue = newValue!;
+                  });
+                },
+              ),
+              const Flexible(
+                child: Text(
+                  "J'ai lu et j'accepte les Conditions d'utilisation et la Politique de confidentialité",
+                  softWrap: true,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
         TextButton(
             style: btnSignUp,
-            onPressed: () {},
+            onPressed: () {
+              //uploadFile();
+              signUpFirebase(_email, _password);
+            },
             child: Text(t(context)!.register, style: p1)),
       ]),
     );
@@ -210,7 +352,7 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
 
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        image = File(pickedFile.path);
       } else {
         print('No image selected.');
       }

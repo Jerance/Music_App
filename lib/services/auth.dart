@@ -5,6 +5,16 @@ import 'package:music_app/pages/trend_page.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 
+void signUpFirebase(email, password) {
+  try {
+    auth
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .then((value) => print(value.user));
+  } catch (e) {
+    debugPrint(e.toString());
+  }
+}
+
 void loginFirebase(String email, String password, context) {
   try {
     auth

@@ -51,3 +51,4 @@ flutter:
     - lib/assets/img/icons/backward-solid.svg
     - lib/assets/img/icons/pause-solid.svg
     - lib/assets/img/icons/play-solid.svg
+    - lib/assets/img/icons/circle-exclamation-solid.svg
