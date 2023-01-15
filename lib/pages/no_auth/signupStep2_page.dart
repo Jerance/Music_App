@@ -31,13 +31,17 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
   String _email = "";
   String _password = "";
 
+  final lastNameField = TextEditingController();
+  final firstNameField = TextEditingController();
+  final pseudoField = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     _email = widget.email;
     _password = widget.password;
 
-    dateinput.text = ""; //set the initial value of text field
+    birthDateField.text = ""; //set the initial value of text field
     super.initState();
   }
 
@@ -50,7 +54,7 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
     await uploadTask.whenComplete(() => print("File uploaded successfully"));
   }
 
-  final dateinput = TextEditingController();
+  final birthDateField = TextEditingController();
 
   bool checkedValue = false;
   @override
@@ -119,10 +123,11 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
                 Container(
                   width: 160,
                   height: 60,
-                  child: const Center(
+                  child: Center(
                     child: TextField(
-                      style: TextStyle(color: lightGray, fontSize: 16),
-                      decoration: InputDecoration(
+                      controller: lastNameField,
+                      style: const TextStyle(color: lightGray, fontSize: 16),
+                      decoration: const InputDecoration(
                         border: UnderlineInputBorder(
                           borderSide: BorderSide(
                             width: 0,
@@ -155,10 +160,11 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
                 Container(
                   width: 160,
                   height: 60,
-                  child: const Center(
+                  child: Center(
                     child: TextField(
-                      style: TextStyle(color: lightGray, fontSize: 16),
-                      decoration: InputDecoration(
+                      controller: firstNameField,
+                      style: const TextStyle(color: lightGray, fontSize: 16),
+                      decoration: const InputDecoration(
                         border: UnderlineInputBorder(
                           borderSide: BorderSide(
                             width: 0,
@@ -196,10 +202,11 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
           Container(
             width: 360,
             height: 60,
-            child: const Center(
+            child: Center(
               child: TextField(
-                style: TextStyle(color: lightGray, fontSize: 16),
-                decoration: InputDecoration(
+                controller: pseudoField,
+                style: const TextStyle(color: lightGray, fontSize: 16),
+                decoration: const InputDecoration(
                   border: UnderlineInputBorder(
                     borderSide: BorderSide(
                       width: 0,
@@ -237,7 +244,7 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
               style: const TextStyle(color: lightGray, fontSize: 16),
               textAlignVertical: TextAlignVertical
                   .center, // text qui va centrer au niveau du prefix Icon
-              controller: dateinput, //editing controller of this TextField
+              controller: birthDateField, //editing controller of this TextField
               decoration: const InputDecoration(
                 border: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -297,7 +304,7 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
                   //you can implement different kind of Date Format here according to your requirement
 
                   setState(() {
-                    dateinput.text =
+                    birthDateField.text =
                         formattedDate; //set output date to TextField value.
                   });
                 } else {
@@ -339,7 +346,8 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
             style: btnSignUp,
             onPressed: () {
               //uploadFile();
-              signUpFirebase(_email, _password);
+              signUpFirebase(_email, _password, lastNameField.text,
+                  firstNameField.text, pseudoField.text, birthDateField.text);
             },
             child: Text(t(context)!.register, style: p1)),
       ]),
