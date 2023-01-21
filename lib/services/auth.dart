@@ -2,39 +2,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:music_app/pages/no_auth/home_page.dart';
+import 'package:music_app/pages/no_auth/signUpSucess.dart';
 import 'package:music_app/pages/trend_page.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 FirebaseFirestore store = FirebaseFirestore.instance;
 
-void signUpFirebase(email, password, lastName, firstName, pseudo, birthdate) {
+void signUpFirebase(
+    email, password, lastName, firstName, pseudo, birthdate, context) {
   try {
     auth
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      print(value.user!.uid);
-      createUser(value.user!.uid, lastName, firstName, pseudo, birthdate);
-    });
-  } catch (e) {
-    debugPrint(e.toString());
-  }
-}
-
-Future<void> createUser(
-    String userID, lastName, firstName, pseudo, birthdate) async {
-  return store
-      .collection('Users')
-      .doc(userID)
-      .set({
+      return store.collection('Users').doc(value.user!.uid).set({
         'lastname': lastName,
         'firstname': firstName,
         'pseudo': pseudo,
         'birthdate': birthdate,
-      })
-      .then((value) => print("Utilisateur ajouté"))
-      .catchError(
+        "createdAt": Timestamp.now(),
+      }).then((value) {
+        debugPrint("Utilisateur ajouté");
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const SignUpSuccessPage()));
+      }).catchError(
         (error) => print("Erreur: $error"),
       );
+    });
+  } catch (e) {
+    debugPrint(e.toString());
+  }
 }
 
 void loginFirebase(String email, String password, context) {
@@ -58,6 +54,4 @@ void loginFirebase(String email, String password, context) {
 
 void logoutFirebase(context) {
   auth.signOut();
-  Navigator.push(context,
-      MaterialPageRoute(builder: (context) => const HomeWithNoAuthPage()));
 }

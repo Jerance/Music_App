@@ -346,8 +346,14 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
             style: btnSignUp,
             onPressed: () {
               //uploadFile();
-              signUpFirebase(_email, _password, lastNameField.text,
-                  firstNameField.text, pseudoField.text, birthDateField.text);
+              signUpFirebase(
+                  _email,
+                  _password,
+                  lastNameField.text,
+                  firstNameField.text,
+                  pseudoField.text,
+                  birthDateField.text,
+                  context);
             },
             child: Text(t(context)!.register, style: p1)),
       ]),
