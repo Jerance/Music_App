@@ -45,12 +45,12 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
     super.initState();
   }
 
-  var image;
+  File? _image;
   final picker = ImagePicker();
 
   Future uploadFile() async {
     Reference storageRef = storage.ref('Users').child('test.png');
-    UploadTask uploadTask = storageRef.putFile(image);
+    UploadTask uploadTask = storageRef.putFile(_image!);
     await uploadTask.whenComplete(() => print("File uploaded successfully"));
   }
 
@@ -81,31 +81,22 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
         ),
       ),
       backgroundColor: mainColorDark,
-      body: Column(children: [
-        CircleAvatar(
-          maxRadius: 60,
-          minRadius: 50,
-          backgroundColor: lightGray,
-          // backgroundImage: ,
-          child: Column(
-            children: [
-              Container(
-                child: image == null
-                    ? const Text('No image selected')
-                    : Image.file(image!),
+      body: Column(children: <Widget>[
+        _image == null
+            ? const CircleAvatar(
+                radius: 60,
+                backgroundColor: gold,
+              )
+            : CircleAvatar(
+                radius: 60,
+                backgroundImage: FileImage(_image!),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              FloatingActionButton(
-                  backgroundColor: gold,
-                  onPressed: getImage,
-                  child: const Icon(
-                    Icons.add_a_photo,
-                    color: mainColorDark,
-                  )),
-            ],
+        IconButton(
+          icon: Icon(
+            Icons.add_a_photo,
+            color: Colors.white,
           ),
+          onPressed: getImage,
         ),
         const SizedBox(
           height: 10,
@@ -334,6 +325,7 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
                 child: Text(
                   "J'ai lu et j'accepte les Conditions d'utilisation et la Politique de confidentialité",
                   softWrap: true,
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ],
@@ -345,7 +337,7 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
         TextButton(
             style: btnSignUp,
             onPressed: () {
-              //uploadFile();
+              uploadFile();
               signUpFirebase(
                   _email,
                   _password,
@@ -366,7 +358,7 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
 
     setState(() {
       if (pickedFile != null) {
-        image = File(pickedFile.path);
+        _image = File(pickedFile.path);
       } else {
         print('No image selected.');
       }
