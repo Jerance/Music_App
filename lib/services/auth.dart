@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:music_app/pages/no_auth/Home.dart';
+import 'package:music_app/AppLayout.dart';
 import 'package:music_app/pages/no_auth/SignUpSucess.dart';
-import 'package:music_app/pages/Trend.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 FirebaseFirestore store = FirebaseFirestore.instance;
@@ -41,7 +40,7 @@ void loginFirebase(String email, String password, context) {
       // Connexion réussie
       debugPrint(value.toString());
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const TrendPage()));
+          context, MaterialPageRoute(builder: (context) => AppLayoutPage()));
     }).catchError((error) {
       // Connexion échouée
       debugPrint(error.toString());
