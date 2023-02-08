@@ -54,4 +54,5 @@ void loginFirebase(String email, String password, context) {
 
 void logoutFirebase(context) {
   auth.signOut();
+  Navigator.pop(context);
 }

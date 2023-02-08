@@ -49,7 +49,8 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
   final picker = ImagePicker();
 
   Future uploadFile() async {
-    Reference storageRef = storage.ref('Users').child('test.png');
+    Reference storageRef =
+        storage.ref('UsersPhoto').child('${pseudoField.text}.png');
     UploadTask uploadTask = storageRef.putFile(_image!);
     await uploadTask.whenComplete(() => print("File uploaded successfully"));
   }
