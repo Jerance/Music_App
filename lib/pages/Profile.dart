@@ -97,13 +97,34 @@ class _ProfilePageState extends State<ProfilePage> {
                     : NetworkImage(test),
               )),
           const SizedBox(
-            height: 20,
+            height: 30,
           ),
           Text(
             userPseudo,
             style: mainTitle,
           ),
-          const Text("Amis 0"),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Amis 0",
+                style: paragraphTextStyle,
+              ),
+              SizedBox(width: 10.0),
+              Text(
+                "Suivis 0",
+                style: paragraphTextStyle,
+              ),
+              SizedBox(width: 10.0),
+              Text(
+                "Playlists 0",
+                style: paragraphTextStyle,
+              ),
+            ],
+          ),
         ]),
       ),
       endDrawer: Drawer(
