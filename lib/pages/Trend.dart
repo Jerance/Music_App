@@ -28,7 +28,6 @@ class TrendPage extends StatelessWidget {
           ],
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(items: const []),
     );
   }
 }

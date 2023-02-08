@@ -8,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 // Import Pages
 import 'package:music_app/pages/no_auth/Home.dart';
-import 'package:music_app/pages/trend_page.dart';
+import 'package:music_app/AppLayout.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -21,7 +21,7 @@ Future<void> main() async {
       runApp(const Routes(initialPage: HomeWithNoAuthPage()));
       debugPrint("Run App --> Utilisateur non connecté");
     } else {
-      runApp(const Routes(initialPage: TrendPage()));
+      runApp(Routes(initialPage: AppLayoutPage()));
       debugPrint("Run App --> Utilisateur connecté");
     }
   });
