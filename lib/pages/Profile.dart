@@ -7,6 +7,7 @@ import 'package:music_app/assets/theme/colors.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:music_app/services/auth.dart';
 
 FirebaseStorage storage = FirebaseStorage.instance;
 
@@ -64,11 +65,19 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: gold,
+        title: Text(
+          'Profile Page',
+          style: mainTitleDark,
+        ),
+      ),
       backgroundColor: mainColorDark,
       body: Center(
         child: Column(children: <Widget>[
           const SizedBox(
-            height: 100,
+            height: 50,
           ),
           Container(
               height: 200,
@@ -94,7 +103,60 @@ class _ProfilePageState extends State<ProfilePage> {
             userPseudo,
             style: mainTitle,
           ),
+          const Text("Amis 0"),
         ]),
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: gold,
+              ),
+              child: Text(""),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.edit,
+                color: mainColorDark,
+              ),
+              title: Text(
+                'Edit',
+                style: darkParagraph,
+              ),
+              onTap: () {
+                // navigation code
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.settings,
+                color: mainColorDark,
+              ),
+              title: Text(
+                'Settings',
+                style: darkParagraph,
+              ),
+              onTap: () {
+                // navigation code
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.logout,
+                color: mainColorDark,
+              ),
+              title: Text(
+                'Deconnection',
+                style: darkParagraph,
+              ),
+              onTap: () {
+                logoutFirebase(context);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

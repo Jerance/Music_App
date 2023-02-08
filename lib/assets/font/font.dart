@@ -14,6 +14,12 @@ TextStyle p1gold =
 TextStyle mainTitle = GoogleFonts.fredokaOne(
     color: mainColorLight, fontWeight: FontWeight.bold, fontSize: 30);
 
+TextStyle darkParagraph = GoogleFonts.poppins(
+    color: mainColorDark, fontWeight: FontWeight.bold, fontSize: 15);
+
+TextStyle mainTitleDark =
+    GoogleFonts.fredokaOne(color: mainColorDark, fontSize: 20);
+
 TextStyle textSlides =
     GoogleFonts.poppins(color: gold, fontSize: 12, fontWeight: FontWeight.bold);
 
