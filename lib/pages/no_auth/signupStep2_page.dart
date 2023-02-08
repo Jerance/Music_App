@@ -359,14 +359,8 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
         await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      CroppedFile? croppedImage = await ImageCropper().cropImage(
-        sourcePath: pickedFile.path,
-        aspectRatio: const CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
-        compressQuality: 100,
-        maxWidth: 700,
-        maxHeight: 700,
-        compressFormat: ImageCompressFormat.jpg,
-      );
+      CroppedFile? croppedImage =
+          await ImageCropper().cropImage(sourcePath: pickedFile.path);
       File croppedImageConverted = File.fromUri(Uri.parse(croppedImage!.path));
       setState(() {
         _image = croppedImageConverted;
