@@ -17,7 +17,10 @@ class TrendPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(t(context)!.nomApplication, style: paragraphTextStyle),
+            Text(
+              "TrendPage",
+              style: mainTitle,
+            ),
             TextButton(
               style: btnSignUp,
               onPressed: () {
@@ -28,7 +31,6 @@ class TrendPage extends StatelessWidget {
           ],
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(items: const []),
     );
   }
 }
