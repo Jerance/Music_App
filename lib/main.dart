@@ -7,7 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 // Import Pages
-import 'package:music_app/pages/no_auth/home.dart';
+import 'package:music_app/pages/no_auth/Home.dart';
 import 'package:music_app/pages/trend_page.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;

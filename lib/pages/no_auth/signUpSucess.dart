@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/assets/theme/styles.dart';
-import 'package:music_app/pages/no_auth/login_page.dart';
+import 'package:music_app/pages/no_auth/Login.dart';
 import 'package:music_app/services/auth.dart';
 import 'package:music_app/utils/translate.dart';
 

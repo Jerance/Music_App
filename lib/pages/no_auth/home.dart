@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:music_app/assets/theme/styles.dart';
-import 'package:music_app/pages/no_auth/login_page.dart';
-import 'package:music_app/pages/no_auth/signup_page.dart';
+import 'package:music_app/pages/no_auth/Login.dart';
+import 'package:music_app/pages/no_auth/SignUp.dart';
 
 import 'package:music_app/utils/translate.dart';
 import 'package:music_app/models/silder_home.dart';

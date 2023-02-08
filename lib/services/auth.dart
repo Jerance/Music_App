@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:music_app/pages/no_auth/home.dart';
-import 'package:music_app/pages/no_auth/signUpSucess.dart';
+import 'package:music_app/pages/no_auth/Home.dart';
+import 'package:music_app/pages/no_auth/SignUpSucess.dart';
 import 'package:music_app/pages/trend_page.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;

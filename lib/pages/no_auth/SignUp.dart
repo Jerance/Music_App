@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:music_app/assets/theme/styles.dart';
-import 'package:music_app/pages/no_auth/signupStep2_page.dart';
+import 'package:music_app/pages/no_auth/SignUpStep2.dart';
 import 'package:music_app/utils/translate.dart';
 
 import 'package:music_app/assets/font/font.dart';
