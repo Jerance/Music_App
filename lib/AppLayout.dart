@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:music_app/assets/theme/colors.dart';
+import 'package:music_app/pages/Library.dart';
+import 'package:music_app/pages/Profile.dart';
+import 'package:music_app/pages/Search.dart';
+import 'package:music_app/pages/Social.dart';
 import 'package:music_app/pages/Trend.dart';
 
 class AppLayoutPage extends StatefulWidget {
@@ -12,7 +16,13 @@ class AppLayoutPage extends StatefulWidget {
 class _AppLayoutPageState extends State<AppLayoutPage> {
   int _selectedPage = 0;
 
-  final _pageOptions = [TrendPage(), TrendPage(), TrendPage()];
+  final _pageOptions = [
+    const TrendPage(),
+    const SearchPage(),
+    const LibraryPage(),
+    const SocialPage(),
+    const ProfilePage()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +66,7 @@ class _AppLayoutPageState extends State<AppLayoutPage> {
             label: 'Profile',
           ),
         ],
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
