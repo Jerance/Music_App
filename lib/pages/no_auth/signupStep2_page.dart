@@ -6,6 +6,7 @@ import 'package:music_app/utils/translate.dart';
 
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 import 'package:music_app/assets/font/font.dart';
 import 'package:music_app/assets/theme/colors.dart';
@@ -357,12 +358,19 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
     final XFile? pickedFile =
         await picker.pickImage(source: ImageSource.gallery);
 
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
+    if (pickedFile != null) {
+      CroppedFile? croppedImage = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        aspectRatio: const CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
+        compressQuality: 100,
+        maxWidth: 700,
+        maxHeight: 700,
+        compressFormat: ImageCompressFormat.jpg,
+      );
+      File croppedImageConverted = File.fromUri(Uri.parse(croppedImage!.path));
+      setState(() {
+        _image = croppedImageConverted;
+      });
+    }
   }
 }
