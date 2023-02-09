@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,6 +17,34 @@ class AppLayoutPage extends StatefulWidget {
 }
 
 class _AppLayoutPageState extends State<AppLayoutPage> {
+  User? user = FirebaseAuth.instance.currentUser;
+
+  String userPseudo = "";
+  String userPhotoUrl = "";
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
+    final DocumentReference document =
+        FirebaseFirestore.instance.collection("Users").doc(user?.uid);
+    await document.get().then((snapshot) {
+      if (snapshot.exists) {
+        setState(() {
+          var data = snapshot.data() as Map;
+          userPseudo = data['pseudo'];
+          userPhotoUrl = data['profilephotourl'];
+          debugPrint(userPhotoUrl);
+        });
+      } else {
+        print("Aucun document trouvé");
+      }
+    });
+  }
+
   int _selectedPage = 0;
 
   final _pageOptions = [
@@ -68,7 +98,7 @@ class _AppLayoutPageState extends State<AppLayoutPage> {
               icon: SvgPicture.asset("lib/assets/img/icons/library-solid.svg",
                   height: 25),
               activeIcon: SvgPicture.asset(
-                "lib/assets/img/icons/playlist-solid.svg",
+                "lib/assets/img/icons/library-solid.svg",
                 height: 25,
                 color: gold,
               ),
@@ -84,13 +114,16 @@ class _AppLayoutPageState extends State<AppLayoutPage> {
               label: 'Social',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset("lib/assets/img/icons/user-solid.svg",
-                  height: 25),
-              activeIcon: SvgPicture.asset(
-                "lib/assets/img/icons/user-solid.svg",
-                height: 25,
-                color: gold,
-              ),
+              icon: userPhotoUrl == ""
+                  ? const Text("")
+                  : Container(
+                      height: 25,
+                      width: 25,
+                      child: CircleAvatar(
+                          foregroundColor: gold,
+                          backgroundColor: gold,
+                          backgroundImage: NetworkImage(userPhotoUrl)),
+                    ),
               label: 'Profile',
             ),
           ],

@@ -41,25 +41,11 @@ class _ProfilePageState extends State<ProfilePage> {
         setState(() {
           var data = snapshot.data() as Map;
           userPseudo = data['pseudo'];
-          getProfilImage();
+          userPhotoUrl = data['profilephotourl'];
         });
       } else {
         print("Aucun document trouvé");
       }
-    });
-  }
-
-  getProfilImage() {
-    Reference ref = storage.ref().child("UsersPhoto/${userPseudo}.png");
-    ref.getDownloadURL().then((downloadUrl) {
-      setState(() {
-        userPhotoUrl = downloadUrl.toString();
-        debugPrint(userPhotoUrl);
-      });
-    }).catchError((e) {
-      setState(() {
-        print('Un problème est survenu: ${e}');
-      });
     });
   }
 
@@ -89,13 +75,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   BoxShadow(color: gold, blurStyle: BlurStyle.solid),
                 ],
               ),
-              child: CircleAvatar(
-                foregroundColor: gold,
-                backgroundColor: gold,
-                backgroundImage: userPhotoUrl != null
-                    ? NetworkImage(userPhotoUrl!)
-                    : NetworkImage(test),
-              )),
+              child: userPhotoUrl != null
+                  ? CircleAvatar(
+                      foregroundColor: gold,
+                      backgroundColor: gold,
+                      backgroundImage: NetworkImage(userPhotoUrl!))
+                  : const Text("")),
           const SizedBox(
             height: 30,
           ),

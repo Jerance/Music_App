@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:music_app/assets/font/font.dart';
 import 'package:music_app/assets/theme/colors.dart';
 
-class SocialPage extends StatelessWidget {
-  const SocialPage({Key? key}) : super(key: key);
+class ChatPage extends StatelessWidget {
+  const ChatPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class SocialPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'SocialPage',
+                'ChatPage',
                 style: mainTitle,
               )
             ]),
