@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/assets/font/font.dart';
 
 import 'package:music_app/assets/theme/colors.dart';
 
@@ -21,8 +22,90 @@ class _SocialPageState extends State<SocialPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: mainColorDark,
-        body: Container(
-          child: UsersList(),
+        body: Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 75,
+            ),
+            Text(
+              'SocialPage',
+              style: mainTitle,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: const Color(0xFF1A1A1A),
+              ),
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: gold,
+                      ),
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Text('Messages'),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.message,
+                            size: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: gold,
+                      ),
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Text('Groupes'),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.group,
+                            size: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: gold,
+                      ),
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Text('Liste amis'),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.list,
+                            size: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]),
+            ),
+            const Expanded(
+              child: UsersList(),
+            ),
+          ],
         ));
   }
 }
