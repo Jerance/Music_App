@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:music_app/assets/font/font.dart';
 import 'package:music_app/assets/theme/colors.dart';
 import 'package:music_app/pages/Library.dart';
 import 'package:music_app/pages/Profile.dart';
 import 'package:music_app/pages/Search.dart';
-import 'package:music_app/pages/Social.dart';
+import 'package:music_app/pages/Social/Social.dart';
 import 'package:music_app/pages/Trend.dart';
 
 class AppLayoutPage extends StatefulWidget {
@@ -28,45 +29,73 @@ class _AppLayoutPageState extends State<AppLayoutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pageOptions[_selectedPage],
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        type: BottomNavigationBarType.fixed,
-        unselectedItemColor: goldPaperLight,
-        selectedItemColor: gold,
-        currentIndex: _selectedPage,
-        onTap: (int index) {
-          setState(() {
-            _selectedPage = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("lib/assets/img/icons/ranking-star.svg",
-                height: 25),
-            label: 'Trend',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("lib/assets/img/icons/search-solid.svg",
-                height: 25),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("lib/assets/img/icons/playlist-solid.svg",
-                height: 25),
-            label: 'Library',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("lib/assets/img/icons/globe-solid.svg",
-                height: 25),
-            label: 'Social',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("lib/assets/img/icons/user-solid.svg",
-                height: 25),
-            label: 'Profile',
-          ),
-        ],
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+      bottomNavigationBar: Container(
+        color: const Color(0xFF1A1A1A),
+        padding: const EdgeInsets.only(left: 10, right: 10),
+        child: BottomNavigationBar(
+          backgroundColor: const Color(0xFF1A1A1A),
+          type: BottomNavigationBarType.fixed,
+          unselectedItemColor: goldPaperLight,
+          selectedItemColor: gold,
+          unselectedLabelStyle: navbarItems,
+          currentIndex: _selectedPage,
+          onTap: (int index) {
+            setState(() {
+              _selectedPage = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset("lib/assets/img/icons/ranking-star.svg",
+                    height: 25),
+                activeIcon: SvgPicture.asset(
+                  "lib/assets/img/icons/ranking-star.svg",
+                  height: 25,
+                  color: gold,
+                ),
+                label: 'Trend'),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset("lib/assets/img/icons/search-solid.svg",
+                  height: 25),
+              activeIcon: SvgPicture.asset(
+                "lib/assets/img/icons/search-solid.svg",
+                height: 25,
+                color: gold,
+              ),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset("lib/assets/img/icons/library-solid.svg",
+                  height: 25),
+              activeIcon: SvgPicture.asset(
+                "lib/assets/img/icons/playlist-solid.svg",
+                height: 25,
+                color: gold,
+              ),
+              label: 'Library',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset("lib/assets/img/icons/globe-solid.svg",
+                  height: 25),
+              activeIcon: SvgPicture.asset(
+                  "lib/assets/img/icons/globe-solid.svg",
+                  height: 25,
+                  color: gold),
+              label: 'Social',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset("lib/assets/img/icons/user-solid.svg",
+                  height: 25),
+              activeIcon: SvgPicture.asset(
+                "lib/assets/img/icons/user-solid.svg",
+                height: 25,
+                color: gold,
+              ),
+              label: 'Profile',
+            ),
+          ],
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

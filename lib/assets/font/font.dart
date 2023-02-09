@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../theme/colors.dart';
 
+TextStyle navbarItems =
+    GoogleFonts.poppins(color: goldPaperLight, fontSize: 12.5);
+
 TextStyle paragraphTextStyle = GoogleFonts.poppins(color: gold, fontSize: 15);
 
 TextStyle p1 = GoogleFonts.poppins(

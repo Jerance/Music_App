@@ -55,6 +55,6 @@ flutter:
     - lib/assets/img/icons/circle-exclamation-solid.svg
     - lib/assets/img/icons/ranking-star.svg
     - lib/assets/img/icons/search-solid.svg
-    - lib/assets/img/icons/playlist-solid.svg
+    - lib/assets/img/icons/library-solid.svg
     - lib/assets/img/icons/globe-solid.svg
     - lib/assets/img/icons/user-solid.svg
