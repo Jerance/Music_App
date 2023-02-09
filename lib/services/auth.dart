@@ -7,8 +7,8 @@ import 'package:music_app/pages/no_auth/SignUpSucess.dart';
 FirebaseAuth auth = FirebaseAuth.instance;
 FirebaseFirestore store = FirebaseFirestore.instance;
 
-void signUpFirebase(
-    email, password, lastName, firstName, pseudo, birthdate, context) {
+void signUpFirebase(email, password, lastName, firstName, pseudo, birthdate,
+    photoUrl, context) {
   try {
     auth
         .createUserWithEmailAndPassword(email: email, password: password)
@@ -18,6 +18,7 @@ void signUpFirebase(
         'firstname': firstName,
         'pseudo': pseudo,
         'birthdate': birthdate,
+        'profilephotourl': photoUrl,
         "createdAt": Timestamp.now(),
       }).then((value) {
         debugPrint("Utilisateur ajouté");

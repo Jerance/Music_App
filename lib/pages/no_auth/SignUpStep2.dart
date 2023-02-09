@@ -31,6 +31,7 @@ class SignUpStep2Screen extends StatefulWidget {
 class _SignUpStep2PageState extends State<SignUpStep2Screen> {
   String _email = "";
   String _password = "";
+  String userPhotoUrl = "";
 
   final lastNameField = TextEditingController();
   final firstNameField = TextEditingController();
@@ -54,6 +55,23 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
         storage.ref('UsersPhoto').child('${pseudoField.text}.png');
     UploadTask uploadTask = storageRef.putFile(_image!);
     await uploadTask.whenComplete(() => print("File uploaded successfully"));
+  }
+
+  Future downloadFile() async {
+    Reference storageRef =
+        storage.ref('UsersPhoto').child('${pseudoField.text}.png');
+    return await storageRef.getDownloadURL().then((downloadUrl) {
+      setState(() {
+        debugPrint(downloadUrl);
+        userPhotoUrl = downloadUrl.toString();
+        print("Profil photo downloaded successfully");
+        debugPrint(userPhotoUrl);
+      });
+    }).catchError((e) {
+      setState(() {
+        print('Un problème est survenu: ${e}');
+      });
+    });
   }
 
   final birthDateField = TextEditingController();
@@ -338,8 +356,10 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
         ),
         TextButton(
             style: btnSignUp,
-            onPressed: () {
-              uploadFile();
+            onPressed: () async {
+              await uploadFile();
+              await downloadFile();
+              // ignore: use_build_context_synchronously
               signUpFirebase(
                   _email,
                   _password,
@@ -347,6 +367,7 @@ class _SignUpStep2PageState extends State<SignUpStep2Screen> {
                   firstNameField.text,
                   pseudoField.text,
                   birthDateField.text,
+                  userPhotoUrl,
                   context);
             },
             child: Text(t(context)!.register, style: p1)),
