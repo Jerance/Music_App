@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:music_app/assets/font/font.dart';
 import 'package:music_app/assets/theme/colors.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
@@ -25,6 +26,7 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: mainColorDark,
       appBar: AppBar(
+        backgroundColor: mainColorLight,
         title: Row(
           children: [
             CircleAvatar(
@@ -33,14 +35,14 @@ class ChatPage extends StatelessWidget {
             const SizedBox(width: 20),
             Text(
               otherUserName,
-              overflow: TextOverflow.ellipsis,
+              style: darkParagraph,
             ),
           ],
         ),
       ),
       body: Container(
         padding: const EdgeInsets.all(10),
-        color: Colors.grey.shade100,
+        color: mainColorDark,
         height: double.infinity,
         child: ListSection(otherUserID),
       ),
@@ -58,27 +60,40 @@ class MessageField extends StatelessWidget {
     return Transform.translate(
       offset: Offset(0.0, -1 * MediaQuery.of(context).viewInsets.bottom),
       child: BottomAppBar(
+        color: mainColorLight,
         child: Container(
           height: 50,
           padding: const EdgeInsets.symmetric(vertical: 2),
           child: Row(
             children: [
-              IconButton(icon: const Icon(Icons.camera_alt), onPressed: () {}),
-              IconButton(icon: const Icon(Icons.image), onPressed: () {}),
-              IconButton(icon: const Icon(Icons.voice_chat), onPressed: () {}),
+              IconButton(
+                  icon: const Icon(
+                    Icons.camera_alt,
+                    color: mainColorDark,
+                  ),
+                  onPressed: () {}),
+              IconButton(
+                  icon: const Icon(
+                    Icons.image,
+                    color: mainColorDark,
+                  ),
+                  onPressed: () {}),
               Expanded(
                 child: TextField(
                   controller: textField,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: mainColorLight,
                     hintText: 'Entrez votre  message',
                   ),
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.arrow_forward),
+                icon: const Icon(
+                  Icons.send,
+                  color: gold,
+                ),
                 onPressed: () => sendMessage(),
               ),
             ],
@@ -141,7 +156,10 @@ class _ListSectionState extends State<ListSection> {
         if (!snapshot.hasData) return const Center(child: Text('Chargement'));
         _docs = snapshot.data!.docs;
         if (_docs.isEmpty) {
-          return const Center(child: Text('Envoyez votre premier message'));
+          return const Center(
+              child: Text('Envoyez votre premier message',
+                  style: TextStyle(
+                      color: mainColorLight, fontWeight: FontWeight.bold)));
         }
         return SingleChildScrollView(
           child: Column(

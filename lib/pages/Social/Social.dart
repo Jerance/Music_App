@@ -19,9 +19,9 @@ class _SocialPageState extends State<SocialPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         backgroundColor: mainColorDark,
-        body: Center(
+        body: Container(
           child: UsersList(),
         ));
   }
@@ -88,23 +88,30 @@ class UserLineDesign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: Colors.black),
+        ),
+      ),
+      padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
       child: Row(
         children: [
           SizedBox(
-            height: 70,
-            width: 70,
+            height: 50,
+            width: 50,
             child: CircleAvatar(
               backgroundImage: NetworkImage(_photoUrl),
             ),
           ),
-          const SizedBox(width: 20),
+          const SizedBox(width: 40),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(_pseudo,
                   style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold)),
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: mainColorLight)),
             ],
           ),
         ],
