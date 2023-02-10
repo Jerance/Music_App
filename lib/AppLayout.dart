@@ -37,7 +37,6 @@ class _AppLayoutPageState extends State<AppLayoutPage> {
           var data = snapshot.data() as Map;
           userPseudo = data['pseudo'];
           userPhotoUrl = data['profilephotourl'];
-          debugPrint(userPhotoUrl);
         });
       } else {
         print("Aucun document trouvé");
