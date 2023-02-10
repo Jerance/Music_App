@@ -1,6 +1,7 @@
 // Flutter material.dart & l10n
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Import Firebase
 import 'package:firebase_core/firebase_core.dart';
@@ -15,6 +16,7 @@ FirebaseAuth auth = FirebaseAuth.instance;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await dotenv.load(fileName: ".env");
 
   auth.authStateChanges().listen((User? user) {
     if (user == null) {
