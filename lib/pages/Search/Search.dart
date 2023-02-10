@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/assets/font/font.dart';
 import 'package:music_app/assets/theme/colors.dart';
-
-import 'package:music_app/services/getSpotifyData.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-String? accessTokenSpotifyAPI = dotenv.env['TOCKEN_ACCESS_SPOTIFY_API'];
+import 'package:music_app/pages/Search/SearchResults.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -16,13 +12,6 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final _searchController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    searchDataFromSpotifyAPI(
-        accessTokenSpotifyAPI!, "DIE", "track", "FR", 3, 0);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +36,13 @@ class _SearchPageState extends State<SearchPage> {
                 width: 400,
                 height: 60,
                 alignment: Alignment.center,
-                child: Row(children: const [
+                child: Row(children: [
                   Expanded(
                     child: TextField(
-                        style: TextStyle(color: mainColorLight),
+                        controller: _searchController,
+                        style: const TextStyle(color: mainColorLight),
                         decoration: InputDecoration(
-                          border: UnderlineInputBorder(
+                          border: const UnderlineInputBorder(
                             borderSide: BorderSide(
                               width: 0,
                               style: BorderStyle.none,
@@ -67,12 +57,22 @@ class _SearchPageState extends State<SearchPage> {
                           filled: true,
                           fillColor: inputBg,
                           suffixIcon: IconButton(
-                              icon: Icon(
-                                Icons.search,
-                                color: gold,
-                              ),
-                              onPressed: null),
-                          hintStyle: TextStyle(color: lightGray, fontSize: 16),
+                            icon: const Icon(
+                              Icons.search,
+                              color: gold,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SearchResultPage(
+                                          searchQ: _searchController.text,
+                                        )),
+                              );
+                            },
+                          ),
+                          hintStyle:
+                              const TextStyle(color: lightGray, fontSize: 16),
                         )),
                   ),
                 ]),

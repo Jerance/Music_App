@@ -7,7 +7,7 @@ import 'package:music_app/assets/font/font.dart';
 import 'package:music_app/assets/theme/colors.dart';
 import 'package:music_app/pages/Library.dart';
 import 'package:music_app/pages/Profile.dart';
-import 'package:music_app/pages/Search.dart';
+import 'package:music_app/pages/Search/Search.dart';
 import 'package:music_app/pages/Social/Social.dart';
 import 'package:music_app/pages/Trend.dart';
 
