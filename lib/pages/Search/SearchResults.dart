@@ -7,6 +7,8 @@ import 'package:music_app/assets/theme/colors.dart';
 import 'package:music_app/pages/Search/models/TracksModels.dart';
 import 'package:music_app/services/getSpotifyData.dart';
 
+import 'package:http/http.dart' as http;
+
 String? accessTokenSpotifyAPI = dotenv.env['TOCKEN_ACCESS_SPOTIFY_API'];
 
 class SearchResultPage extends StatefulWidget {
@@ -23,30 +25,18 @@ class SearchResultPage extends StatefulWidget {
 
 class _SearchResultPageState extends State<SearchResultPage> {
   String _searchQ = "";
-  var tracks = <Tracks>[];
+  late Map _response;
+  late List<Tracks> tracks;
 
-  void getTracks() {
-    TracksSearch.searchDataFromSpotifyAPI(
-            accessTokenSpotifyAPI!, _searchQ, "track", "FR", 3, 0)
-        .then((response) {
-      setState(() {
-        Iterable list = json.decode(response)['tracks'];
-        tracks = list.map((model) => Tracks.fromJson(model)).toList();
-      });
-    });
-  }
-
-  void Test() {
-    TracksSearch.searchDataFromSpotifyAPI(
-        accessTokenSpotifyAPI!, _searchQ, "track", "FR", 3, 0);
+  Future _getTracks() {
+    return TracksSearch.searchDataFromSpotifyAPI(
+        accessTokenSpotifyAPI!, _searchQ, "track", "FR", 1, 0);
   }
 
   @override
   void initState() {
     super.initState();
     _searchQ = widget.searchQ;
-    Test();
-    //getTracks();
   }
 
   @override
@@ -59,25 +49,54 @@ class _SearchResultPageState extends State<SearchResultPage> {
           style: mainTitleDark,
         ),
       ),
-      body: ListView.builder(
-        itemCount: tracks.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(
-              tracks[0].title,
-            ),
-            subtitle: Text(tracks[0].artist),
-            leading: Container(
-              height: 60,
-              width: 100,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(tracks[index].imageUrl),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          );
+      body: FutureBuilder(
+        future: TracksSearch.searchDataFromSpotifyAPI(
+          accessTokenSpotifyAPI!,
+          widget.searchQ,
+          "track",
+          "FR",
+          3,
+          0,
+        ),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            Map<String, dynamic> jsonMap = json.decode(snapshot.data.body);
+            List allItems = jsonMap['tracks']['items'];
+            final allTracks = allItems.map((e) => Tracks.fromJson(e)).toList();
+
+            return ListView.builder(
+              itemCount: allTracks.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: Colors.black),
+                    ),
+                  ),
+                  child: ListTile(
+                    title: Text(
+                      allTracks[index].title,
+                    ),
+                    subtitle: Text(allTracks[index].artist),
+                    leading: Container(
+                      height: 60,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(allTracks[index].imageUrl),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );
