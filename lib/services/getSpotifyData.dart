@@ -19,3 +19,24 @@ Future<void> getSpotifyData(String accessToken) async {
     debugPrint("error404:");
   }
 }
+
+Future<void> searchDataFromSpotifyAPI(String accessToken, String q, String type,
+    String market, int limit, int offset) async {
+  final response = await http.get(
+    Uri.parse(
+        'https://api.spotify.com/v1/search?q=$q&type=$type&market=$market&limit=$limit&offset=$offset'),
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Authorization: Bearer $accessToken',
+      'Content-Type': 'application/json',
+      'Host': 'api.spotify.com'
+    },
+  );
+
+  if (response.statusCode == 200) {
+    final data = json.decode(response.body);
+    debugPrint(data.toString());
+  } else if (response.statusCode == 400) {
+    debugPrint("error400:");
+  }
+}

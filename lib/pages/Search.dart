@@ -15,10 +15,13 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
-    getSpotifyData(accessTokenSpotifyAPI!);
+    searchDataFromSpotifyAPI(
+        accessTokenSpotifyAPI!, "DIE", "track", "FR", 3, 0);
   }
 
   @override
@@ -26,14 +29,57 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       backgroundColor: mainColorDark,
       body: Center(
-        child: Column(
+        child: Column(children: <Widget>[
+          const SizedBox(
+            height: 75,
+          ),
+          Text(
+            'Search your Music',
+            style: mainTitle,
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'SearchPage',
-                style: mainTitle,
-              )
-            ]),
+            children: [
+              Container(
+                width: 400,
+                height: 60,
+                alignment: Alignment.center,
+                child: Row(children: const [
+                  Expanded(
+                    child: TextField(
+                        style: TextStyle(color: mainColorLight),
+                        decoration: InputDecoration(
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 0,
+                              style: BorderStyle.none,
+                            ),
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(10),
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
+                          filled: true,
+                          fillColor: inputBg,
+                          suffixIcon: IconButton(
+                              icon: Icon(
+                                Icons.search,
+                                color: gold,
+                              ),
+                              onPressed: null),
+                          hintStyle: TextStyle(color: lightGray, fontSize: 16),
+                        )),
+                  ),
+                ]),
+              ),
+            ],
+          ),
+        ]),
       ),
     );
   }
