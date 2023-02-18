@@ -6,7 +6,6 @@ import 'package:music_app/assets/font/font.dart';
 import 'package:music_app/assets/theme/colors.dart';
 import 'package:music_app/pages/Search/models/TracksModels.dart';
 import 'package:music_app/services/getSpotifyData.dart';
-import 'package:spotify_sdk/spotify_sdk.dart';
 
 import 'package:http/http.dart' as http;
 
