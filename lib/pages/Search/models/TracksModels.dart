@@ -13,7 +13,7 @@ class Tracks {
 
   factory Tracks.fromJson(Map<String, dynamic> json) {
     return Tracks(
-        title: json['album']['name'],
+        title: json['name'],
         artist: json['album']['artists'][0]['name'],
         imageUrl: json['album']['images'][0]['url'],
         trackUri: json['album']['uri']);
