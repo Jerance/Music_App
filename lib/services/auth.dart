@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:music_app/AppLayout.dart';
+import 'package:music_app/pages/no_auth/HomeNoAuth.dart';
 import 'package:music_app/pages/no_auth/SignUpSucess.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
@@ -54,5 +55,6 @@ void loginFirebase(String email, String password, context) {
 
 void logoutFirebase(context) {
   auth.signOut();
-  Navigator.pop(context);
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => HomeWithNoAuthPage()));
 }
