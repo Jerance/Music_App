@@ -33,7 +33,7 @@ class _SearchPageState extends State<SearchPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 400,
+                width: 380,
                 height: 60,
                 alignment: Alignment.center,
                 child: Row(children: [
