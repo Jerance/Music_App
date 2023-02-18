@@ -6,6 +6,7 @@ import 'package:music_app/assets/font/font.dart';
 import 'package:music_app/assets/theme/colors.dart';
 import 'package:music_app/pages/Search/models/TracksModels.dart';
 import 'package:music_app/services/getSpotifyData.dart';
+import 'package:spotify_sdk/spotify_sdk.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -30,7 +31,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
 
   Future _getTracks() {
     return TracksSearch.searchDataFromSpotifyAPI(
-        accessTokenSpotifyAPI!, _searchQ, "track", "FR", 1, 0);
+        accessTokenSpotifyAPI!, _searchQ, "track", "FR", 10, 0);
   }
 
   @override
@@ -45,22 +46,16 @@ class _SearchResultPageState extends State<SearchResultPage> {
       appBar: AppBar(
         backgroundColor: gold,
         title: Text(
-          'Results SearchPage',
+          'Results SearchPage 10',
           style: mainTitleDark,
         ),
       ),
       body: FutureBuilder(
-        future: TracksSearch.searchDataFromSpotifyAPI(
-          accessTokenSpotifyAPI!,
-          widget.searchQ,
-          "track",
-          "FR",
-          3,
-          0,
-        ),
+        future: _getTracks(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Map<String, dynamic> jsonMap = json.decode(snapshot.data.body);
+            debugPrint(jsonMap.toString());
             List allItems = jsonMap['tracks']['items'];
             final allTracks = allItems.map((e) => Tracks.fromJson(e)).toList();
 
@@ -70,15 +65,21 @@ class _SearchResultPageState extends State<SearchResultPage> {
                 return Container(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   decoration: const BoxDecoration(
+                    color: mainColorDark,
                     border: Border(
-                      bottom: BorderSide(color: Colors.black),
+                      bottom: BorderSide(color: mainColorLight),
                     ),
                   ),
                   child: ListTile(
                     title: Text(
                       allTracks[index].title,
+                      style: const TextStyle(
+                          color: mainColorLight, fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(allTracks[index].artist),
+                    subtitle: Text(
+                      allTracks[index].artist,
+                      style: TextStyle(color: gold),
+                    ),
                     leading: Container(
                       height: 60,
                       width: 100,
